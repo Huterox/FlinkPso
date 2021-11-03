@@ -87,5 +87,8 @@ Author：Huterox
 
 # 更新
 V0.52 重新更改了循环过程当中的全局最优算子，减少了不必要的比较，提高了运行效率。
+    --StreamPso
+        --DoStream
+            --MinMapsGinterate(Update)
 
 
