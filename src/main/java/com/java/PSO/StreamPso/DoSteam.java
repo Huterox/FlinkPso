@@ -35,7 +35,7 @@ public class DoSteam {
         //第二次调用是为了给所有的个体赋值，和个体的最优处理
         SingleOutputStreamOperator<Bird> map = Birdtimeing.map(new MinMapsG());
         KeyedStream<Bird, Tuple> id = map.keyBy("id");
-        SingleOutputStreamOperator<Bird> map1 = id.map(new MinMapsG());
+        SingleOutputStreamOperator<Bird> map1 = id.map(new MinMapsGinterate());
         SingleOutputStreamOperator<Bird> RealStream = map1.map(new MinMapsPinitial());
 //        RealStream.print("init");
 
@@ -44,7 +44,7 @@ public class DoSteam {
         SingleOutputStreamOperator<Bird> IterationBody = iterateStream.keyBy(Bird::getInterTimes) //分组
                 .map(new MinMapsG()) //首次寻早最优解
                 .keyBy("id") //再次分组两个原因
-                .map(new MinMapsG()) // 再次统计最优解，为全局的位置最优解
+                .map(new MinMapsGinterate()) // 再次统计最优解，为全局的位置最优解
                 .map(new MinMapsP())// 循环处理当中的个体最优解决
                 .map(new CalculationPso());//这一步是进行粒子群的运算，也是比较重要的一环
 
@@ -128,6 +128,16 @@ public class DoSteam {
 
     }
 
+
+    static class MinMapsGinterate implements MapFunction<Bird,Bird>{
+        //由于前面先运行MinMapsG后已经记录了全局最优，所以没有必要进行比较了，直接进行修改即可为了
+        //保证运行效率
+        @Override
+        public Bird map(Bird bird) throws Exception {
+            bird.setGbest(bird1.getXpostion());
+            return bird;
+        }
+    }
 
     static class MinMapsG implements MapFunction<Bird,Bird>{
         //这个是通用的不存在初始化例外使用的情况

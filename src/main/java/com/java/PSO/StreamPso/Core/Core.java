@@ -9,7 +9,7 @@ public class Core {
 
     static Random random = new Random();
 
-    public static ArrayList<Double> UpdateSpeed(Bird bird){
+    public static void UpdateSpeed(Bird bird){
         ArrayList<Double> CurrentSpeed = bird.getVpersent();
         //更新速度,传入大鸟，会自动更新大鸟的速度，同时返回更新后的速度向量
         Double fai1 = ConfigPso.C1 * random.nextDouble(); //c1*r1
@@ -27,10 +27,9 @@ public class Core {
         //完成对速度的更新
         bird.setVpersent(CurrentSpeed);
 
-        return CurrentSpeed;
     }
 
-    public static ArrayList<Double> UpdatePosition(Bird bird){
+    public static void UpdatePosition(Bird bird){
         //更新位置,传入大鸟，会自动更新大鸟的位置，同时返回更新后的位置的向量
         int index = 0;
         ArrayList<Double> CurrentXposition = bird.getXpostion();
@@ -45,17 +44,15 @@ public class Core {
 
         bird.setXpostion(CurrentXposition);
 
-        return CurrentXposition;
     }
 
-    public static Bird UpDataBird(Bird bird){
+    public static void UpDataBird(Bird bird){
         //返回Bird，负责对前面的方法进行调度。只需要调用这一个方法就可以实现位置和速度更新
         //先更新速度然后才能够更新位置
         //由于每一个个体过来都会需要执行一下算子，所以每一次在执行的时候fai1,fai2都是不同的
         //也就是每一个在每一轮当中的fai都是不同的，有可能会提高拟真度。
         UpdateSpeed(bird);
         UpdatePosition(bird);
-        return bird;
     }
 
 }
