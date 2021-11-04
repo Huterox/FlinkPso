@@ -16,7 +16,7 @@
 
         @Override
         public Double FourFunction(ArrayList<Double> parames) {
-            return null;
+            do something here
         }
     }
     
@@ -61,13 +61,14 @@ public class RunPso {
 
         @Override
         public Double FourFunction(ArrayList<Double> parames) {
-            do something you want
-            return null;
+            do something here
+           
         }
     }
 }
 ```
 之后结果将输出如下类型的参数
+
 > The best bird:2> Bird(id=9, Pbest=[-2.696461290214497E-7, 1.888839707431761E-7, -3.292871075358361E-7], Gbest=[2.8232826557437633E-8, 1.3849311677496851E-8, -2.006572561901652E-8], Functionresult=2.193299565877222E-18, LFunctionresult=2.1681618848927858E-13, Xpostion=[-3.3993504062773074E-7, 2.279120524951932E-7, -4.1071585970869873E-7], Vpersent=[-7.028891160628103E-8, 3.9028081752017106E-8, -8.142875217286262E-8], InterTimes=100)
 
 
@@ -87,8 +88,20 @@ Author：Huterox
 
 # 更新
 V0.52 重新更改了循环过程当中的全局最优算子，减少了不必要的比较，提高了运行效率。
+    
     --StreamPso
+
         --DoStream
-            --MinMapsGinterate(Update)
+
+            --MinMapsGinterate(Class)
 
 
+V0.53 废弃了原先固定的权重向量（你依然可以选择实现原来的固定权重向量，但是我们不推荐使用）
+增加了线性权重向量的改变方式。改变目录
+
+    --ConfigPso
+
+        --ConfigPso
+            
+            --LineGoW(Function)
+            
